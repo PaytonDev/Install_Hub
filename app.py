@@ -11,3 +11,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config["SECRET_KEY"] = "super-extra-secretive"
 
 connect_db(app)
+
+@app.route('/')
+def show_homepage():
+    return render_template("homepage.html")
