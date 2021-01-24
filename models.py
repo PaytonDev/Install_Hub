@@ -1,6 +1,8 @@
 import datetime
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 
+bcrypt = Bcrypt()
 db = SQLAlchemy()
 
 def connect_db(app):
@@ -26,7 +28,7 @@ class Project(db.Model):
     projectid = db.Column(db.Integer, autoincrement = True, primary_key = True)
     title = db.Column(db.Text, nullable=False)
     dealership = db.Column(db.Integer, db.ForeignKey('dealerships.dtid'))
-    installers = db.Column(db.ARRAY(db.Integer), nullable=False)
+    user = db.Column(db.ARRAY(db.Integer), nullable=False)
     project_date = db.Column(db.DateTime, default=datetime.date.today())
     dealer = db.relationship('Dealership')
 
@@ -48,10 +50,10 @@ class Employee(db.Model):
     email = db.Column(db.Text, nullable = False)
     dept = db.relationship('Department')
 
-class Installer(db.Model):
-    __tablename__ = 'installers'
+class User(db.Model):
+    __tablename__ = 'users'
 
-    installerid = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    userid = db.Column(db.Integer, autoincrement = True, primary_key = True)
     current_dealership = db.Column(db.Integer, db.ForeignKey("dealerships.dtid"))
     i_firstname = db.Column(db.Text, nullable = False)
     i_lastname = db.Column(db.Text, nullable = False)
@@ -59,8 +61,38 @@ class Installer(db.Model):
     i_title = db.Column(db.Text, nullable = False)
     phone = db.Column(db.Text, nullable = False)
     email = db.Column(db.Text, nullable = False)
+    username = db.Column(db.Text, nullable = False, unique=True)
+    i_password = db.Column(db.Text, nullable = False, unique=True)
     dept = db.relationship('Department')
     dealer = db.relationship('Dealership')
+
+    @classmethod
+    def signup(cls, username, i_password, current_dealership, i_firstname,
+    i_lastname, i_department, i_title, phone, email):
+
+        hashed_pwd = bcrypt.generate_password_hash(i_password).decode('UTF-8')
+
+        user = User(
+            username = username,
+            i_password = hashed_pwd,
+            current_dealership = current_dealership,
+            i_firstname = i_firstname, 
+            i_lastname = i_lastname,
+            i_department = i_department,
+            i_title = i_title,
+            phone = phone, 
+            email = email
+        )
+        db.session.add(user)
+        return user
+
+    @classmethod
+    def authenticate(cls, username, i_password):
+        user = cls.query.filter_by(username=username).first()
+
+        if user:
+            is_auth = bcrypt.ch
+
 
 class Task(db.Model):
     __tablename__ = 'tasks'

@@ -1,0 +1,36 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+<div class="container-fluid text-center" id="current-install-info">
+    <div class="row mx-auto">
+        <div class="col-6 install-name">
+            <div class="install-headers mb-3">
+                <h1 id="install-header" class="mb-1">Current Install:</h1>
+                <h3 id="install-dealership">Tom Wood Ford</h3>
+            </div>
+            <div class="header-buttons">
+                <a class="btn btn-primary btn-lg m-1">Task List</a>
+                <a class="btn btn-light btn-lg m-1">Interaction Log</a>
+            </div>
+        </div>
+        <div class="col-2 install-ids pl-4">
+            <div class="install-id-title mb-3">
+                <h3 id="install-header" class="mb-1">Enterprise #</h4>
+                    <h4 class="install-data">{{ dealer.ent_code }}</h4>
+            </div>
+        </div>
+        <div class="col-2 install-ids px-2">
+            <div class="install-id-title mb-3">
+                <h3 id="install-header" class="mb-1">Store #</h4>
+                    <h4 class="install-data">{{ dealer.store_num }}</h4>
+            </div>
+        </div>
+        <div class="col-2 install-ids px-2">
+            <div class="install-id-title mb-3">
+                <h3 id="install-header" class="mb-1">DTID</h4>
+                    <h4 class="install-data">{{ dealer.dtid }}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

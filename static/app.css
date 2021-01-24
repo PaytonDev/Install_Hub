@@ -1,0 +1,40 @@
+h1 {
+    margin: 2rem;
+}
+
+input {
+    margin: 1rem;
+}
+
+select {
+    margin: 1rem;
+}
+
+.onboarding {
+    margin: 0 auto;
+}
+
+.navbar-brand > img{
+    width: 60px;
+    height: 60px;
+}
+
+#current-install-info {
+    width: 90%;
+    height: 20%;
+    background-color: #fff;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    /* padding: 5%; */
+}
+
+.install-name {
+    border-right: 1px solid rgba(51, 51, 51, 0.33);
+}
+
+/* #install-header {
+    font-size: 64px;
+} */
+.install-ids {
+    border-right: 1px solid rgba(51, 51, 51, 0.33);
+}
