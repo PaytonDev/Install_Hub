@@ -40,5 +40,4 @@ e. What will the user flow look like?
 1. If the user&#39;s title is &quot;Implementation Manager&quot;, they will have the ability to navigate to the &quot;Create Install&quot; Page which will allow the user to create a project, assign a dealership, and assign the trainers to that dealership. This will be accessible from their side menu. They will also be able to remove or replace trainers.
 
 f. What features make your site more than CRUD? Do you have any stretch goals?
-
 - My major stretch goals are giving correct access to users, protecting their passwords with Bcrypt, and implementing the layout of data on the front end correctly since most of it will be dynamic.
