@@ -1,17 +1,13 @@
 {% extends 'login.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-md-center onboarding">
+<div class="d-flex text-center justify-content-center align-items-center mx-auto my-0">
+    <div class="d-flex row mx-auto justify-content-center onboarding-block">
         <div class="col-lg-5 text-center">
             <h1>Register Installer</h1>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for msg in messages %}
+                    {% for category, msg in get_flashed_messages(with_categories=true) %}
                         <div class="alert alert-{{ category }}">{{ msg }}</div>
                     {% endfor %}
-                {% endif %}
-            {% endwith %}
             <form method="POST" id="register-form">
                 {{form.hidden_tag()}}
 
@@ -21,7 +17,8 @@
                     {% endfor %}
                     {{field(placeholder=field.label.text, class='form-control')}}
                 {% endfor %}
-                <button class="btn btn-primary">Add Installer</button>
+                <button class="btn btn-primary mx-2">Add Installer</button>
+                <a class="btn btn-secondary mx-2">Cancel</a>
             </form>
         </div>
     </div>

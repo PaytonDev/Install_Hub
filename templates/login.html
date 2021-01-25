@@ -9,11 +9,14 @@
 </head>
 <body>
     {% block content %}
-    <div class="container">
-        <div class="row justify-content-md-center text-center onboarding">
-            <div class="col-lg-5">
+    <div class="d-flex text-center justify-content-center align-items-center mx-auto my-0" id="login-info">
+        <div class="d-flex row mx-auto justify-content-center onboarding-block">
+            <div class="col-5">
                 <h1>Please Login</h1>
-                <form method="POST" id="login-form">
+                        {% for category, msg in get_flashed_messages(with_categories=true) %}
+                            <div class= 'alert alert-{{category}} mx-auto'>{{ msg }}</div>
+                        {% endfor %}
+                <form method="POST" class="text-center" formaction="/ id="login-form">
                     {{form.hidden_tag()}}
 
                     {% for field in form if field.widget.input_type != 'hidden' %}
@@ -21,9 +24,10 @@
                             <span class="text-danger">{{error}}</span>
                         {% endfor %}
 
-                        {{field(placeholder=field.label.text, class='form-control')}}
+                        {{field(placeholder=field.label.text, class='form-control mx-auto')}}
                     {% endfor %}
-                    <button class="btn btn-primary">Login</button>
+                    <a class="btn btn-primary mx-2">Login</a>
+                    <a href='/'class="btn btn-secondary mx-2">Cancel</a>
                 </form>
             </div>
         </div>

@@ -1,5 +1,5 @@
 h1 {
-    margin: 2rem;
+    margin: 1rem;
 }
 
 input {
@@ -25,16 +25,36 @@ select {
     background-color: #fff;
     margin-top: 5%;
     margin-bottom: 5%;
-    /* padding: 5%; */
 }
 
 .install-name {
     border-right: 1px solid rgba(51, 51, 51, 0.33);
 }
 
-/* #install-header {
-    font-size: 64px;
-} */
 .install-ids {
     border-right: 1px solid rgba(51, 51, 51, 0.33);
+}
+
+
+img {
+    height: auto;
+    width: 100%;
+}
+
+#homepage-info, #login-info{
+    width: 90%;
+    height: 90%;
+    background-color: #fff;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+body, html {
+    width: auto;
+    height: 100%;
+}
+
+.onboarding-block{
+    width: 80%;
+    height: auto;
 }

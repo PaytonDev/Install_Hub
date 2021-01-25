@@ -50,11 +50,11 @@ def login():
         if user:
             login_user(user)
             flash(f'Welcome, {user.full_name()}!', "success")
-            return redirect('/install-detail')
+            return redirect(f'/user/{user.userid}/detail')
 
         flash("Invalid login.", "danger")
 
-    return render_template("login.html", form=form)
+    return render_template('login.html', form=form)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -63,36 +63,37 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        try:
-            user = User.signup(
-                username = form.username.data,
-                i_password = form.password.data,
-                i_firstname = form.first_name.data,
-                i_lastname = form.last_name.data,
-                i_title = form.title.data,
-                phone = form.phone_num.data,
-                email = form.email.data,
-                i_department = form.department.data,
-                current_dealership = form.current_dealership.data
-            )
-            db.session.commit()
+        # try:
+        user = User.signup(
+            username = form.username.data,
+            i_password = form.password.data,
+            i_firstname = form.first_name.data,
+            i_lastname = form.last_name.data,
+            i_title = form.title.data,
+            phone = form.phone_num.data,
+            email = form.email.data,
+            i_department = form.department.data,
+            current_dealership = form.current_dealership.data
+        )
+        db.session.commit()
 
-        except IntegrityError:
-            flash("Username is taken", "danger")
-            return render_template('register.html', form=form)
+        # except IntegrityError:
+        #     flash("Username is taken", "danger")
+        #     return render_template('register.html', form=form)
 
         login_user(user)
-        return redirect("user/<int:user.userid>install-detail")
+        return redirect(f"/user/{user.userid}/detail")
 
     else:
+        flash('OOOPS!')
         return render_template("register.html", form=form)
 
 @app.route('/user/<int:userid>/detail', methods=['GET', 'POST'])
 def show_install_detail(userid):
     """Loading data about the install to show on the page"""
 
-    user = g.user
-    dealer = User.query.filter_by(user.current_dealership)
+    user = User.query.get_or_404(userid)
+    dealer = Dealership.query.get_or_404(user.current_dealership)
 
 
     return render_template('user/install-detail.html', user=user, dealer=dealer)
