@@ -96,4 +96,12 @@ def show_install_detail(userid):
     dealer = Dealership.query.get_or_404(user.current_dealership)
 
 
-    return render_template('user/install-detail.html', user=user, dealer=dealer)
+    return render_template('user/detail.html', user=user, dealer=dealer)
+
+@app.route('/user/<int:userid>/<int:current_dealership>/interaction-log', methods=['GET', 'POST'])
+def show_dealership_inter_log(userid, current_dealership):
+
+    user = User.query.get_or_404(userid)
+    current_dealership = Dealership.query.get_or_404(user.current_dealership)
+
+    return render_template('user/interraction-log.html', user=user, dealer=current_dealership)

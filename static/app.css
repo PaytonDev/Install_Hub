@@ -19,21 +19,19 @@ select {
     height: 60px;
 }
 
-#current-install-info {
+.current-install-info {
     width: 90%;
-    height: 20%;
+    height: 30%;
     background-color: #fff;
     margin-top: 5%;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
 }
 
-.install-name {
-    border-right: 1px solid rgba(51, 51, 51, 0.33);
+.install-name, .install-ids, .detail-title {
+    border-right: 1px solid rgba(51, 51, 51, 0.2);
 }
 
-.install-ids {
-    border-right: 1px solid rgba(51, 51, 51, 0.33);
-}
+
 
 
 img {
@@ -52,9 +50,40 @@ img {
 body, html {
     width: auto;
     height: 100%;
+    background-color: #f8f9fa;
 }
 
 .onboarding-block{
     width: 80%;
     height: auto;
 }
+
+.navbar {
+    background-color: #fff
+}
+
+#contact {
+    border: 1px solid rgba(51, 51, 51, 0.2);
+    width: 80%;
+    margin: auto;
+    overflow-y: auto;
+}
+
+.interaction-item {
+    border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+}
+
+.dropdown-menu {
+    max-height: 100px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+
+/* .info-display {
+    height: 30%;
+}
+
+.employee-dropdown {
+    height: 10%;
+} */

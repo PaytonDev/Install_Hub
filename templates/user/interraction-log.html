@@ -1,0 +1,68 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+<div class="container-fluid mx-auto" style="height: 100%;">
+    <div class="row employee-dropdown my-4 text-center" style="height: 20%">
+        <div class="col-12">
+            <div class="dropdown btn-group">
+                <button class="btn btn-dark dropdown-toggle btn-lg" type="button" id="select-employee" data-toggle='dropdown' aria-expanded="false">
+                    Select Employee
+                </button>
+                <div class="dropdown-menu">
+                    <a href="" class="dropdown-item" >Btn1</a>
+                    <a href="" class="dropdown-item">Btn2</a>
+                    <a href="" class="dropdown-item">Btn3</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row info-display my-4 text-center" style="height: 40%;">
+        <div class="col-4">
+            <h4 id="employee-name-title">John Doe - F&I Manager</h4>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="interaction-type" data-toggle='dropdown' aria-expanded="false">
+                    Type Of Interaction
+                </button>
+                <div class="dropdown-menu mx-auto">
+                    <a href="" class="dropdown-item">Called Dealership</a>
+                    <a href="" class="dropdown-item">Dealership Called</a>
+                    <a href="" class="dropdown-item">Sent Email</a>
+                    <a href="" class="dropdown-item">Recieved Email</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-primary text-white">Notes:</span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="col-4">
+            <div style="height: 275px;">
+                <div id="contact" style="height: 100%;">
+                    <ul class="interaction-list text-decoration-none">
+                        <li class="interaction-item text-decoration-none my-4">Call at 2pm</li>
+                        <li class="interaction-item text-decoration-none my-4">Call at 2pm</li>
+                        <li class="interaction-item text-decoration-none my-4">Call at 2pm</li>
+                        <li class="interaction-item text-decoration-none my-4">Call at 2pm</li>
+                        <li class="interaction-item text-decoration-none my-4">Call at 2pm</li>
+                        <li class="interaction-item text-decoration-none my-4">Call at 2pm</li>
+                        <li class="interaction-item text-decoration-none my-4">Call at 2pm</li>
+                        <li class="interaction-item text-decoration-none my-4">Call at 2pm</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-auto my-4">
+        <div class="col-12">
+            <div>
+            <h2 class="notes-title d-block">Interaction Notes</h2>
+            <p class="d-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. At error adipisci harum, ducimus hic consequuntur praesentium ipsa, dicta alias, saepe reiciendis quos quod obcaecati omnis maiores sequi ex. Nostrum, aspernatur.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
