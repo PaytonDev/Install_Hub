@@ -28,10 +28,12 @@ def login_user(user):
     """ Log in user """
     session[USER_KEY] = user.userid
 
+
 def logout_user():
     """Logout user"""
     if USER_KEY in session:
         del session[USER_KEY]
+    
 
 
 @app.route('/')
@@ -49,9 +51,9 @@ def login():
 
         if user:
             login_user(user)
-            flash(f'Welcome, {user.full_name()}!', "success")
+            flash(f'Welcome, {user.i_firstname}!', "success")
             return redirect(f'/user/{user.userid}/detail')
-
+        
         flash("Invalid login.", "danger")
 
     return render_template('login.html', form=form)
@@ -63,30 +65,30 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        # try:
-        user = User.signup(
-            username = form.username.data,
-            i_password = form.password.data,
-            i_firstname = form.first_name.data,
-            i_lastname = form.last_name.data,
-            i_title = form.title.data,
-            phone = form.phone_num.data,
-            email = form.email.data,
-            i_department = form.department.data,
-            current_dealership = form.current_dealership.data
-        )
-        db.session.commit()
+        try:
+            user = User.signup(
+                username = form.username.data,
+                i_password = form.password.data,
+                i_firstname = form.first_name.data,
+                i_lastname = form.last_name.data,
+                i_title = form.title.data,
+                phone = form.phone_num.data,
+                email = form.email.data,
+                i_department = form.department.data,
+                current_dealership = form.current_dealership.data
+            )
+            db.session.commit()
 
-        # except IntegrityError:
-        #     flash("Username is taken", "danger")
-        #     return render_template('register.html', form=form)
+        except IntegrityError:
+            flash("Username is taken", "danger")
+            return render_template('register.html', form=form)
 
         login_user(user)
         return redirect(f"/user/{user.userid}/detail")
 
     else:
-        flash('OOOPS!')
         return render_template("register.html", form=form)
+
 
 @app.route('/user/<int:userid>/detail', methods=['GET', 'POST'])
 def show_install_detail(userid):
@@ -95,8 +97,8 @@ def show_install_detail(userid):
     user = User.query.get_or_404(userid)
     dealer = Dealership.query.get_or_404(user.current_dealership)
 
-
     return render_template('user/detail.html', user=user, dealer=dealer)
+
 
 @app.route('/user/<int:userid>/<int:current_dealership>/interaction-log', methods=['GET', 'POST'])
 def show_dealership_inter_log(userid, current_dealership):
@@ -105,3 +107,8 @@ def show_dealership_inter_log(userid, current_dealership):
     current_dealership = Dealership.query.get_or_404(user.current_dealership)
 
     return render_template('user/interraction-log.html', user=user, dealer=current_dealership)
+
+@app.route('/logout')
+def log_out_user():
+    logout_user()
+    return render_template('homepage.html')
