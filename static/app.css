@@ -29,10 +29,12 @@ select {
 
 .install-name, .install-ids, .detail-title {
     border-right: 1px solid rgba(51, 51, 51, 0.2);
+    height: 100%;
 }
 
-
-
+#last-title {
+    border: none;
+}
 
 img {
     height: auto;

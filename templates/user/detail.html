@@ -1,8 +1,7 @@
 {% extends 'user/base.html' %}
 
 {% block content %}
-<div class="d-block container-fluid text-center current-install-info">
-    <div class="row mx-auto">
+    <div class="d-flex row mx-auto text-center justify-content-evenly current-install-info">
         <div class="col-6 install-name">
             <div class="install-headers mb-3">
                 <h1  class="mb-1 install-header">Current Install:</h1>
@@ -25,35 +24,31 @@
             </div>
         </div>
         <div class="col-2 install-ids px-2">
-            <div class="install-id-title mb-3">
+            <div class="install-id-title mb-3" id="last-title">
                 <h3 class="mb-1">DTID</h4>
                     <h4 class="install-data">{{ dealer.dtid }}</h4>
             </div>
         </div>
     </div>
-</div>
-<div class="d-flex text-center justify-content-center align-items-start current-install-info mx-auto">
-    <div class="row mx-auto">
+<div class="d-flex row mx-auto justify-content-center current-install-info">
+    <div class="d-flex text-center">
         <h1 class="mb-1">Covid Check-In</h1>
     </div>
 </div>
-<div class="d-flex text-center justify-content-around align-items-center current-install-info mx-auto">
-    <div class="row mx-auto">
-        <div class="col-6 detail-title">
-            <h1>Upcoming Installs</h1>
+    <div class="d-flex row mx-auto current-install-info justify-content-center ">
+        <div class="d-flex col-6 detail-title text-center align-items-center">
+            <h1 class="mx-auto">Upcoming Installs</h1>
         </div>
-        <div class="col-6">
+        <div class="d-flex col-6">
         </div>
     </div>
-</div>
-<div class="d-flex text-center align-items-center current-install-info mx-auto">
-    <div class="row detail-title justify-content-center">
-        <div class="col-6 mx-auto">
-            <h1 class="mb-1">Travel Info</h1>
+    <div class="d-flex row mx-auto current-install-info justify-content-center ">
+        <div class="d-flex col-6 detail-title text-center align-items-center">
+            <h1 class="mx-auto">Travel Info</h1>
         </div>
-        <div class="col-6">
+        <div class="d-flex col-6">
+        </div>
+    </div>
 
-        </div>
-    </div>
-</div>
+
 {% endblock %}
