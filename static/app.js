@@ -1,3 +1,7 @@
+const notes = new Object
+let numNotes = Object.keys(notes).length
+
+
 $('.employees-int').on("click", function(e) {
     e.preventDefault();
     let $empName = $('#employee-name-title').text()
@@ -25,18 +29,20 @@ $('.int-action').on('click', function(e) {
     }
 })
 
+// Adding a timestamped interaction and correlating note 
 $('#add-note').on('click', function(e) {
     e.preventDefault();
-    let $noteContent = $('#note-content');
+    let $noteContent = $('#note-content').text();
     let $notesHead = $('#notes-header').text();
     let timestamp = moment().format("MMM Do, h:mm a")
-    $('.interaction-list').append(`<li><a>${$notesHead} on ${timestamp}</a></li>`);
+    $('.interaction-list').append(`<li><a href="#" id="note-${numNotes}" class="note-link text-decoration-none">${$notesHead} on ${timestamp}</a></li>`);
+    notes[numNotes] = $noteContent;
 })
 
-// function addNote() {
-//     const intNotes = [];
-//     let $intListText = $('.interaction-list li:first-child').text()
-//     if ($intListText) {
 
-//     }
-// }
+$('.note-link').on('click', function(e) {
+    e.preventDefault();
+    $('#note-display').text(notes[e.target.attribute.id]);
+    console.log(notes)
+    $('.notes-area').toggleClass("d-none");
+})
