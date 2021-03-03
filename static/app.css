@@ -21,15 +21,22 @@ select {
 
 .current-install-info {
     width: 90%;
-    height: 30%;
+    height: 30vh;
     background-color: #fff;
     margin-top: 5%;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
+}
+
+.install-text {
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .install-name, .install-ids, .detail-title {
     border-right: 1px solid rgba(51, 51, 51, 0.2);
     height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #last-title {
@@ -46,13 +53,16 @@ img {
     height: 90%;
     background-color: #fff;
     margin-top: 5%;
-    margin-bottom: 5%;
 }
 
-body, html {
+body {
     width: auto;
-    height: 100%;
+    min-height: 100%;
     background-color: #f8f9fa;
+}
+
+html {
+    height: 100%;
 }
 
 .onboarding-block{
@@ -84,6 +94,10 @@ body, html {
     max-height: 100px;
     max-width: 100%;
     overflow-y: auto;
+}
+
+#covid-countdown {
+    font-size: 2rem;
 }
 
 

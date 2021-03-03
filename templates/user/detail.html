@@ -1,7 +1,7 @@
 {% extends 'user/base.html' %}
 
 {% block content %}
-    <div class="d-flex row mx-auto text-center justify-content-evenly current-install-info">
+    <div class="d-flex row mx-auto text-center justify-content-center current-install-info">
         <div class="col-6 install-name">
             <div class="install-headers mb-3">
                 <h1  class="mb-1 install-header">Current Install:</h1>
@@ -11,30 +11,44 @@
                 <a href="/user/{{ user.userid }}/{{ user.current_dealership }}/interaction-log" class="btn btn-light btn-lg m-1">Interaction Log</a>
             </div>
         </div>
-        <div class="col-2 install-ids pl-4">
-            <div class="install-id-title mb-3">
-                <h3  class="mb-1">Enterprise #</h4>
-                    <h4 class="install-data">{{ dealer.ent_code }}</h4>
+        <div class="d-flex col-2 install-ids align-items-center text-center">
+            <div class="install-id-title mb-3 mx-auto">
+                <p class="mb-1 install-text">Enterprise #</p>
+                <p class="install-data install-text">{{ dealer.ent_code }}</p>
             </div>
         </div>
-        <div class="col-2 install-ids px-2">
-            <div class="install-id-title mb-3">
-                <h3 class="mb-1">Store #</h4>
-                    <h4 class="install-data">{{ dealer.store_num }}</h4>
+        <div class="d-flex col-2 install-ids align-items-center text-center">
+            <div class="install-id-title mb-3 mx-auto">
+                <p class="mb-1 install-text">Store #</p>
+                <p class="install-data install-text">{{ dealer.store_num }}</p>
             </div>
         </div>
-        <div class="col-2 install-ids px-2">
-            <div class="install-id-title mb-3" id="last-title">
-                <h3 class="mb-1">DTID</h4>
-                    <h4 class="install-data">{{ dealer.dtid }}</h4>
+        <div class="d-flex col-2 install-ids align-items-center text-center">
+            <div class="install-id-title mb-3 mx-auto" id="last-title">
+                <p class="mb-1 install-text">DTID</p>
+                <p class="install-data install-text">{{ dealer.dtid }}</p>
             </div>
         </div>
     </div>
-<div class="d-flex row mx-auto justify-content-center current-install-info">
-    <div class="d-flex text-center">
-        <h1 class="mb-1">Covid Check-In</h1>
+
+    <div class="d-flex mx-auto row justify-content-center current-install-info">
+        <div class=" d-flex col-6 flex-column text-center detail-title">
+            <div class="my-2">
+                <h1>Covid Check-In</h1>
+                <h4>You have:</h4>
+                <h3 id="covid-countdown"></h3>
+                <h4>to check in.</h4>
+            </div>
+        </div>
+        <div class="d-flex col-6 text-center align-items-center">
+            <div class="mx-auto">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                    Covid-19 Check-In
+                </button>
+            </div>
+        </div>
     </div>
-</div>
+
     <div class="d-flex row mx-auto current-install-info justify-content-center ">
         <div class="d-flex col-6 detail-title text-center align-items-center">
             <h1 class="mx-auto">Upcoming Installs</h1>
@@ -42,7 +56,41 @@
         <div class="d-flex col-6">
         </div>
     </div>
-    <div class="d-flex row mx-auto current-install-info justify-content-center ">
+
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header pr-0">
+              <h5 class="modal-title mx-auto" id="staticBackdropLabel">Covid Check-In</h5>
+              <button type="button" class="close mx-0" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <p>In the past 2 weeks have you exibited any of these symptoms:</p>
+                <ul class="covid-symptoms">
+                    <li>Fever or Chills</li>
+                    <li>Cough</li>
+                    <li>Shortness of breath or difficulty breathing</li>
+                    <li>Fatigue</li>
+                    <li>Muscle or body aches</li>
+                    <li>Headache</li>
+                    <li>New loss Of taste or smell</li>
+                    <li>Sore throat</li>
+                    <li>Congestion or runny nose</li>
+                    <li>Nausea or vomiting</li>
+                    <li>Persistent diarrhea</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I have not</button>
+              <button id="covid-positive" type="button" class="btn btn-primary">Yes, I have</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="d-flex row mx-auto current-install-info justify-content-center">
         <div class="d-flex col-6 detail-title text-center align-items-center">
             <h1 class="mx-auto">Travel Info</h1>
         </div>
