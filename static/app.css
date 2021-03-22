@@ -1,3 +1,13 @@
+body {
+    width: auto;
+    height: auto;
+    background-color: #f8f9fa;
+}
+
+html {
+    height: 100%;
+}
+
 h1 {
     margin: 1rem;
 }
@@ -9,6 +19,15 @@ input {
 select {
     margin: 1rem;
 }
+
+img {
+    height: auto;
+    width: 100%;
+}
+
+
+/* Classes */
+
 
 .onboarding {
     margin: 0 auto;
@@ -39,32 +58,6 @@ select {
     padding-bottom: 10px;
 }
 
-#last-title {
-    border: none;
-}
-
-img {
-    height: auto;
-    width: 100%;
-}
-
-#homepage-info, #login-info{
-    width: 90%;
-    height: 90%;
-    background-color: #fff;
-    margin-top: 5%;
-}
-
-body {
-    width: auto;
-    min-height: 100%;
-    background-color: #f8f9fa;
-}
-
-html {
-    height: 100%;
-}
-
 .onboarding-block{
     width: 80%;
     height: auto;
@@ -78,13 +71,6 @@ html {
     width: 100%;
 }
 
-#contact {
-    border: 1px solid rgba(51, 51, 51, 0.2);
-    width: 80%;
-    margin: auto;
-    overflow-y: auto;
-}
-
 .interaction-item {
     border-bottom: 1px solid rgba(51, 51, 51, 0.2);
     list-style-type: none;
@@ -96,10 +82,36 @@ html {
     overflow-y: auto;
 }
 
+
+/* IDs */
+
+
+#last-title {
+    border: none;
+}
+
+#homepage-info, #login-info{
+    width: 90%;
+    height: 90%;
+    background-color: #fff;
+    /* margin-top: 5%; */
+}
+
+#contact {
+    border: 1px solid rgba(51, 51, 51, 0.2);
+    width: 80%;
+    margin: auto;
+    overflow-y: auto;
+}
+
+
 #covid-countdown {
     font-size: 2rem;
 }
 
+#homepage {
+    overflow: none;
+}
 
 /* .info-display {
     height: 30%;
