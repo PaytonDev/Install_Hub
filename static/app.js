@@ -1,4 +1,8 @@
-let currentEmp = '';
+let selectedEmp = '';
+let selectedNote = '';
+let selectedTimeNote = '';
+let linkCopyList = [];
+let linkList = [];
 let empNoteList = new Object;
 
 
@@ -12,8 +16,9 @@ function arrayOfEmployees() {
 
 // Create array of employees for employee dropdown selection on interaction page
 $('.dropdown').on('click', "a", function(e) {
-    e.preventDefault()
-    arrayOfEmployees()
+    e.preventDefault();
+    arrayOfEmployees();
+    createNotesObject();
 })
 
 // function for creating an object to hold interactions for each employee
@@ -22,12 +27,11 @@ function createNotesObject() {
     let keys = Object.keys(empNoteList)
     if (keys.length === 0) {
         for (let e of emps) {
-            empNoteList[e] = [];
-            return empNoteList
+            empNoteList[e] = new Object;
+            empNoteList[e]['notes'] = [];
         }
-    } else {
-        return empNoteList;
-    }
+    } 
+    return empNoteList;
 }
 
 // Displaying employee name on interaction page
@@ -35,15 +39,23 @@ $('.employees-int').on("click", function(e) {
     e.preventDefault();
     let $empNameTitle = $('#employee-name-title').text()
     let empName = e.target.innerText;
+    selectedEmp = empName
+
     if ($empNameTitle) {
         $('#employee-name-title').text('');
         $('#employee-name-title').append(empName);
-        currentEmp = empName;
+
     } else {
         $('#employee-name-title').append(empName);
-        currentEmp = empName;
+        
     }
+
     $('#emp-info').removeClass('d-none');
+
+    createNotesObject();
+    showLinks();
+
+    return selectedEmp
 })
 
 // Adding notes header with type of interaction
@@ -62,30 +74,50 @@ $('.int-action').on('click', function(e) {
 // Adding a timestamped interaction link that leads to correlating note 
 $('#add-note').on('click', function(e) {
     e.preventDefault();
-    let notes = createNotesObject()
+    let noteObj = createNotesObject()
+    let noteArray = noteObj[selectedEmp]['notes']
     let noteContent = $.trim($('textarea').val());
-    let $notesHead = $('#notes-header').text();
+    let $notesLinkCopy = $('#notes-header').text();
     let timestamp = moment().format("MMM Do, h:mm a");
 
-    if (noteContent != '') {
-        notes[currentEmp].push(noteContent)
+    let link = `<li class="note-link">
+    <a>${$notesLinkCopy} on ${timestamp}</a></li>`
 
-        $('.interaction-list').append(
-            `<li class="note-link text-decoration-none"
-            id="note-${notes[currentEmp].indexOf(noteContent)}" >
-            <a>${$notesHead} on ${timestamp}</a></li>`
-            );
+    let linkCopy = `${$notesLinkCopy} on ${timestamp}`
 
+    let linkAndNote = {
+        [linkCopy]:noteContent,
+        [link]:noteContent,
+        timestamp:timestamp,
+        }
+
+    if (noteContent != '') {   
+        $('.interaction-list').append(link)
+        noteArray.push(linkAndNote)
     } else {
         alert('Please enter note!')
     }
 })
 
-// displaying the interaction link
+// displaying the interaction from correlating link
 $('.interaction-list').on('click', 'li', function(e) {
     e.preventDefault()
-    let notes = createNotesObject();
-    $('#note-display').text(notes[currentEmp]);
+    let noteObj = createNotesObject();
+    let noteArray = noteObj[selectedEmp]['notes']
+    let $noteDisplay = $('#note-display')
+    let $noteTime = $('#time-of-note')
+    let linkCopy = getLinkCopy();
+
+
+        if ($noteDisplay.text() === "") {
+            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.innerHTML)][e.target.innerHTML])
+            $noteTime.text(noteArray[linkCopy.indexOf(e.target.innerText)]['timestamp'])
+        } else {
+            $noteDisplay.text('')
+            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.innerText)][e.target.innerText])
+            $noteTime.text(noteArray[linkCopy.indexOf(e.target.innerText)]['timestamp'])
+        }
+
     $('.notes-area').removeClass("d-none");
 });
 
@@ -106,4 +138,48 @@ setInterval(function time(){
 
     $('#covid-countdown').text(`${hours}hrs ${min}mins ${sec}s`)
 
-}, 1000);
+}, 1000)
+
+// Function to display all interaction links for each Employee
+
+    // How do I gather data that holds employee - note relationship?
+
+
+
+    // How do I display that information with a list of links?
+    function getLinkCopy() {
+        let notesArr = empNoteList[selectedEmp]['notes']
+        let linkCopy = []
+        for (let n of notesArr){
+            linkCopy.push(Object.keys(n)[0])
+        }
+         linkCopyList = linkCopy;
+         console.log(linkCopyList)
+         return linkCopyList;
+    }
+
+    function getLinks() {
+        let notesArr = empNoteList[selectedEmp]['notes']
+        let links = []
+        for (let n of notesArr){
+            links.push(Object.keys(n)[1])
+        }
+         linkList = links;
+         console.log(empNoteList)
+         return linkList;
+    }
+    // Do they change when the employee changes?
+    // Do the links persist?
+
+    function showLinks(){
+        $('.interaction-list').text('')
+        
+        let links = getLinks();
+        if (links.length != 0){
+
+            for (let link of links) {
+                $('.interaction-list').append(link)
+            }
+        }
+        return links
+    }
