@@ -5,7 +5,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 import requests
 import json
-from api import getWeather, requestTimeToAirport
+# from api import getWeather, requestTimeToAirport
 from flask_cors import CORS
 
 USER_KEY = 'curr_user'
@@ -96,10 +96,10 @@ def show_install_detail(userid):
     user = User.query.get_or_404(userid)
     dealer = Dealership.query.get_or_404(user.current_dealership)
 
-    weatherObj = getWeather();
-    timeToAirport = requestTimeToAirport();
+    # weatherObj = getWeather();
+    # timeToAirport = requestTimeToAirport();
 
-    return render_template('user/detail.html', user=user, dealer=dealer, timeToAirport = timeToAirport, weatherObj = weatherObj)
+    return render_template('user/detail.html', user=user, dealer=dealer)
 
 
 @app.route('/user/<int:userid>/<int:current_dealership>/interaction-log', methods=['GET', 'POST'])

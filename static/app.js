@@ -80,22 +80,23 @@ $('#add-note').on('click', function(e) {
     let $notesLinkCopy = $('#notes-header').text();
     let timestamp = moment().format("MMM Do, h:mm a");
 
-    let link = `<li class="note-link">
-    <a>${$notesLinkCopy} on ${timestamp}</a></li>`
+    let link = `<li class="note-link py-2 w-100"><a>${$notesLinkCopy} on ${timestamp}</a></li>`
 
     let linkCopy = `${$notesLinkCopy} on ${timestamp}`
+    
 
     let linkAndNote = {
         [linkCopy]:noteContent,
         [link]:noteContent,
         timestamp:timestamp,
         }
-
-    if (noteContent != '') {   
+    if (noteContent === '') {   
+        alert('Please enter note!')
+    } else if ($notesLinkCopy === 'Notes'){
+        alert('Please select interation type!')
+    } else {
         $('.interaction-list').append(link)
         noteArray.push(linkAndNote)
-    } else {
-        alert('Please enter note!')
     }
 })
 
@@ -110,7 +111,7 @@ $('.interaction-list').on('click', 'li', function(e) {
 
 
         if ($noteDisplay.text() === "") {
-            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.innerHTML)][e.target.innerHTML])
+            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.innerText)][e.target.innerHTML])
             $noteTime.text(noteArray[linkCopy.indexOf(e.target.innerText)]['timestamp'])
         } else {
             $noteDisplay.text('')
@@ -154,7 +155,6 @@ setInterval(function time(){
             linkCopy.push(Object.keys(n)[0])
         }
          linkCopyList = linkCopy;
-         console.log(linkCopyList)
          return linkCopyList;
     }
 
@@ -165,7 +165,6 @@ setInterval(function time(){
             links.push(Object.keys(n)[1])
         }
          linkList = links;
-         console.log(empNoteList)
          return linkList;
     }
     // Do they change when the employee changes?
