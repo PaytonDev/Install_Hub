@@ -3,7 +3,10 @@ from forms import LoginForm, RegisterForm
 from models import db, connect_db, Dealership, Project, Employee, Task, Department, User
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
-# from flask_cors import CORS
+import requests
+import json
+from api import getWeather, requestTimeToAirport
+from flask_cors import CORS
 
 USER_KEY = 'curr_user'
 app = Flask(__name__)
@@ -48,14 +51,11 @@ def login():
 
     if form.validate_on_submit():
         user = User.authenticate(form.username.data, form.password.data)
-
         if user:
             login_user(user)
             flash(f'Welcome, {user.i_firstname}!', "success")
             return redirect(f'/user/{user.userid}/detail')
-        
         flash("Invalid login.", "danger")
-
     return render_template('login.html', form=form)
 
 
@@ -93,11 +93,13 @@ def register():
 @app.route('/user/<int:userid>/detail', methods=['GET', 'POST'])
 def show_install_detail(userid):
     """Loading data about the install to show on the page"""
-
     user = User.query.get_or_404(userid)
     dealer = Dealership.query.get_or_404(user.current_dealership)
 
-    return render_template('user/detail.html', user=user, dealer=dealer)
+    weatherObj = getWeather();
+    timeToAirport = requestTimeToAirport();
+
+    return render_template('user/detail.html', user=user, dealer=dealer, timeToAirport = timeToAirport, weatherObj = weatherObj)
 
 
 @app.route('/user/<int:userid>/<int:current_dealership>/interaction-log', methods=['GET', 'POST'])
@@ -106,7 +108,7 @@ def show_dealership_inter_log(userid, current_dealership):
     user = User.query.get_or_404(userid)
     current_dealership = Dealership.query.get_or_404(user.current_dealership)
 
-    return render_template('user/interraction-log.html', user=user, dealer=current_dealership)
+    return render_template('user/interaction-log.html', user=user, dealer=current_dealership)
 
 @app.route('/logout')
 def log_out_user():
