@@ -1,6 +1,9 @@
 {% extends 'user/base.html' %}
 
 {% block content %}
+    {% for category, msg in get_flashed_messages(with_categories=true) %}
+    <div class= 'alert alert-{{category}} mx-auto text-center'>{{ msg }}</div>
+    {% endfor %}
 
     <div class="container">
     <div class="d-flex row mx-auto text-center justify-content-center current-install-info">
@@ -8,7 +11,7 @@
             <div class="install-headers mb-3 mx-auto">
                 <p class="mb-1 install-header">Current Install:</p>
                 <h3 id="install-dealership">Tom Wood Ford</h3>
-                <a href="/user/{{ user.userid }}/{{ user.current_dealership }}/interaction-log" class="btn btn-light btn-lg m-1">Interaction Log</a>
+                <a href="/user/{{ user.userid }}/{{ user.current_dealership }}/interaction-log" class="btn btn-dark btn-lg m-1">Interaction Log</a>
             </div>
         </div>
         <div class="d-flex col-2 install-ids align-items-center text-center">
@@ -88,18 +91,18 @@
         <div class="d-flex col-3 detail-title text-center align-items-center" id="time-to-dealership">
             <div class="mx-auto">
                 <p class="mx-auto">Travel time To Airport:</p>
-                <!-- <p class="mx-auto" id="airport-time">{{ timeToAirport }}</p> -->
-                <p class="d-none" id="dealer-address">{{ dealer.d_address }}</p>
-                <p class='d-none' id="airport">Richmond International Airport</p>
+                <p class="mx-auto" id="airport-time">{{ timeToAirport }}</p>
+                <!-- <p class="mx-auto" id="dealer-address">{{ dealer.d_address }}</p> -->
+                <p class='mx-auto' id="airport">Richmond International Airport</p>
             </div>
         </div>
         <div class="d-flex col-3 text-center align-items-center" id="weather-by-dealership">
             <div class="mx-auto">
                 <p class="mx-auto my-0">Current Weather In:</p>
                 <p class="mx-auto" id="weather-city">{{ dealer.d_city }}</p>
-                <p id="weather-condition" class="my-0"></p>
-                <p id="weather-temp" class="my-0"></p>
-                <img id="weather-icon" src="" height="50px" class="my-0">
+                <p id="weather-condition" class="my-0">{{ weatherObj.condition }}</p>
+                <p id="weather-temp" class="my-0">{{ weatherObj.temp }}</p>
+                <img id="weather-icon" src="{{ weatherObj.icon }}" height="50px" class="my-0">
             </div>
         </div>
     </div>

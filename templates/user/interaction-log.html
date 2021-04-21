@@ -1,62 +1,70 @@
 {% extends 'user/base.html' %}
 
 {% block content %}
-<div class="container-fluid mx-auto" style="height: 100%;">
-    <div class="row employee-dropdown my-4 text-center" style="height: 20%">
-        <div class="col-12">
-            <div class="dropdown btn-group btn-block">
-                <button class="btn btn-dark dropdown-toggle btn-lg btn-block" type="button" id="select-employee" data-toggle='dropdown' aria-expanded="false">
-                    Select Employee
-                </button>
-                <div class="dropdown-menu w-100 text-center install-text">
+<div class="container-fluid">
+    <div class="row mx-auto">
+        <nav class="col-2 d-md-block collapse sidebar" id="sidebarMenu">
+            <div class="position-sticky ">
+                <ul class="nav flex-column ml-3">
+                    <li class=" nav-item employee-header my-2 ml-2">Employees:</li>
                     {% for emp in dealer.employees %}
-                    <a class="dropdown-item employees-int"  id="{{dealer.employees.index(emp)}}">{{emp}}</a>
+                    <li class="nav-item my-2 emp-list-item install-text">
+                        <a class="employees-int dropdown-toggle nav-link" data-toggle="collapse"  id="{{dealer.employees.index(emp)}}" href="#int-actions{{dealer.employees.index(emp)}}">{{emp}}</a>
+                        <ul class="collapse list-unstyled" id="int-actions{{dealer.employees.index(emp)}}">
+                            <li><a href="#" class="int-action nav-link dropdown-text">Called Dealership</a></li> 
+                            <li><a href="#" class="int-action nav-link dropdown-text">Dealership Called</a></li>
+                            <li><a href="#" class="int-action nav-link dropdown-text">Sent Email</a></li>
+                            <li><a href="#" class="int-action nav-link dropdown-text">Recieved Email</a></li>
+                        </ul>
+                    </li>
                     {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row d-none my-4 mx-auto justify-content-center info-display" style="height: 40%;" id="emp-info">
-        <div class="d-flex col-4 text-center align-items-center">
-            <div class="mx-auto">
-                <h4 id="employee-name-title"></h4>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="interaction-type" data-toggle='dropdown' aria-expanded="false">
-                        Type of Interaction
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" class="dropdown-item int-action">Called Dealership</a></li> 
-                        <li><a href="#" class="dropdown-item int-action">Dealership Called</a></li>
-                        <li><a href="#" class="dropdown-item int-action">Sent Email</a></li>
-                        <li><a href="#" class="dropdown-item int-action">Recieved Email</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-4 text-center">
-            <p id="notes-header" class=" install-text">Notes</p>
-            <div class="input-group">
-                <textarea class="form-control" aria-label="With textarea" id='note-content' rows="10"></textarea>
-            </div>
-            <button class="btn btn-primary btn-block my-2" id="add-note">Add</button>
-        </div>
-        <div class="col-4 text-center">
-            <p id="log-header" class=" install-text">Log</p>
-            <div id="contact">
-                <ul class="interaction-list p-0">
-                    
                 </ul>
             </div>
-        </div>
-    </div>
-    <div class="row mx-auto my-4 d-none notes-area">
-        <div class="col-12">
-            <div>
-            <h2 class="notes-title d-block">Interaction Notes</h2>
-            <h4 id="time-of-note"></h4>
-            <p class="d-block note-formatting" id="note-display"></p>
+        </nav>
+        <main class="col-9 px-md-4 ml-auto mr-5 notes-section">
+            <div class="d-flex text-center align-items-center">
+                <div class="mx-auto">
+                    <p id="employee-name-title">Hi!</p>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="py-2">
+                        <div class="text-center px-3">
+                            <p id="notes-header" class="install-text">Notes</p>
+                            <div class="d-flex align-items-center form-group">
+                                <textarea class="mx-auto form-control" aria-label="With textarea" id='note-content' rows="8"></textarea>
+                            </div>
+                            <button class="btn btn-primary my-2 px-4" id="add-note">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 log-section">
+                    <div class="text-center">
+                        <div class="mx-auto mt-2">
+                            <p id="log-header" class="install-text text-center">Log</p>
+                        </div>
+                    </div>
+                    <div class="text-center mx-auto" id="contact">
+                        <div>
+                            <ul class="interaction-list p-0">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                    <h4 id="time-of-note"></h4>
+                    <div id="note-area">
+                        <p class="d-block note-formatting" id="note-display"></p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 </div>
 {% endblock %}

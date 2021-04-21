@@ -5,7 +5,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 import requests
 import json
-# from api import getWeather, requestTimeToAirport
+from api import getWeather, requestTimeToAirport
 from flask_cors import CORS
 
 USER_KEY = 'curr_user'
@@ -44,18 +44,20 @@ def show_homepage():
     return render_template("homepage.html")
 
 
-@app.route("/login", methods=["GET", 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """handle login validation"""
     form = LoginForm()
 
     if form.validate_on_submit():
         user = User.authenticate(form.username.data, form.password.data)
+
         if user:
             login_user(user)
-            flash(f'Welcome, {user.i_firstname}!', "success")
             return redirect(f'/user/{user.userid}/detail')
+
         flash("Invalid login.", "danger")
+
     return render_template('login.html', form=form)
 
 
@@ -93,13 +95,15 @@ def register():
 @app.route('/user/<int:userid>/detail', methods=['GET', 'POST'])
 def show_install_detail(userid):
     """Loading data about the install to show on the page"""
+
     user = User.query.get_or_404(userid)
     dealer = Dealership.query.get_or_404(user.current_dealership)
+    flash(f'Welcome, {user.i_firstname}!', "success")
 
-    # weatherObj = getWeather();
-    # timeToAirport = requestTimeToAirport();
+    weatherObj = getWeather();
+    timeToAirport = requestTimeToAirport();
 
-    return render_template('user/detail.html', user=user, dealer=dealer)
+    return render_template('user/detail.html', user=user, dealer=dealer, weatherObj = weatherObj, timeToAirport = timeToAirport)
 
 
 @app.route('/user/<int:userid>/<int:current_dealership>/interaction-log', methods=['GET', 'POST'])

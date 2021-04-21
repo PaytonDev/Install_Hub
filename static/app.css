@@ -1,8 +1,8 @@
 body {
     width: auto;
-    height: auto;
+    height: 100%;
     background-color: #f8f9fa;
-    padding-bottom: 50px;
+    padding: 0px, 50px;
 }
 
 html {
@@ -32,11 +32,7 @@ img {
     width: 200px;
 }
 
-.onboarding {
-    margin: 0 auto;
-}
-
-.navbar-brand > img{
+.navbar-brand > img {
     width: 60px;
     height: 60px;
 }
@@ -74,6 +70,22 @@ img {
     width: 100%;
 }
 
+.employee-header {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.sidebar {
+    position: fixed;
+    top: 85px;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 20px 0 0;
+    box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);
+    background: #fff;
+}
+
 .interaction-item {
     border-bottom: 1px solid rgba(51, 51, 51, 0.2);
     list-style-type: none;
@@ -97,10 +109,24 @@ img {
     background: rgb(114, 114, 114);
     color: #fff;
 }
+
+.notes-section, .log-section {
+    background: #fff;
+}
+
+.dropdown-text {
+    color: #000;
+    font-size: medium;
+}
 /* IDs */
 #weather-icon {
     max-height: 50px;
     max-width: 50px;
+}
+
+#employee-name-title {
+    font-size: 28px;
+    font-weight: bolder;
 }
 
 #last-title {
@@ -116,9 +142,8 @@ img {
 
 #contact {
     border: 1px solid rgba(51, 51, 51, 0.2);
-    height: 85%;
+    height: 60%;
     width: 80%;
-    margin: auto;
     overflow-y: auto;
     background: #fff;
 }
@@ -127,10 +152,15 @@ img {
     overflow: none;
 }
 
-/* .info-display {
-    height: 30%;
+#login-form {
+    width: 40%;
 }
 
-.employee-dropdown {
-    height: 10%;
-} */
+#note-content {
+    min-width: 90%;
+}
+
+#add-note {
+    min-width: 32px;
+    max-width: 200px;
+}

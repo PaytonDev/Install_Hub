@@ -15,7 +15,7 @@ function arrayOfEmployees() {
 }
 
 // Create array of employees for employee dropdown selection on interaction page
-$('.dropdown').on('click', "a", function(e) {
+$('.emp-list-item').on('click', "li a", function(e) {
     e.preventDefault();
     arrayOfEmployees();
     createNotesObject();
