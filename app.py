@@ -86,6 +86,7 @@ def register():
             return render_template('register.html', form=form)
 
         login_user(user)
+        flash(f'Welcome, {user.i_firstname}!', "success")
         return redirect(f"/user/{user.userid}/detail")
 
     else:
@@ -95,25 +96,34 @@ def register():
 @app.route('/user/<int:userid>/detail', methods=['GET', 'POST'])
 def show_install_detail(userid):
     """Loading data about the install to show on the page"""
+    if g.user:
+        user = User.query.get_or_404(userid)
+        dealer = Dealership.query.get_or_404(user.current_dealership)
+        
 
-    user = User.query.get_or_404(userid)
-    dealer = Dealership.query.get_or_404(user.current_dealership)
-    flash(f'Welcome, {user.i_firstname}!', "success")
+        weatherObj = getWeather();
+        timeToAirport = requestTimeToAirport();
 
-    weatherObj = getWeather();
-    timeToAirport = requestTimeToAirport();
+        return render_template('user/detail.html', user=user, dealer=dealer, weatherObj = weatherObj, timeToAirport = timeToAirport)
 
-    return render_template('user/detail.html', user=user, dealer=dealer, weatherObj = weatherObj, timeToAirport = timeToAirport)
+    else:
+        flash("Unauthorized. Please Login.", "danger")
+        return redirect(f"/login")
 
 
 @app.route('/user/<int:userid>/<int:current_dealership>/interaction-log', methods=['GET', 'POST'])
 def show_dealership_inter_log(userid, current_dealership):
+    if g.user:
+        user = User.query.get_or_404(userid)
+        current_dealership = Dealership.query.get_or_404(user.current_dealership)
 
-    user = User.query.get_or_404(userid)
-    current_dealership = Dealership.query.get_or_404(user.current_dealership)
+        return render_template('user/interaction-log.html', user=user, dealer=current_dealership)
 
-    return render_template('user/interaction-log.html', user=user, dealer=current_dealership)
+    else:
+        flash("Unauthorized. Please Login.", "danger")
+        return redirect(f"/login")
 
+        
 @app.route('/logout')
 def log_out_user():
     logout_user()

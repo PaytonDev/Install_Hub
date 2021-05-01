@@ -2,14 +2,14 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row mx-auto">
-        <nav class="col-2 d-md-block collapse sidebar" id="sidebarMenu">
+    <div class="row">
+        <nav class="col-2 d-md-block collapse sidebar pt-3" id="sidebarMenu">
             <div class="position-sticky ">
-                <ul class="nav flex-column ml-3">
-                    <li class=" nav-item employee-header my-2 ml-2">Employees:</li>
+                <ul class="nav flex-column">
+                    <li class=" nav-item employee-header my-2 ">Employees:</li>
                     {% for emp in dealer.employees %}
                     <li class="nav-item my-2 emp-list-item install-text">
-                        <a class="employees-int dropdown-toggle nav-link" data-toggle="collapse"  id="{{dealer.employees.index(emp)}}" href="#int-actions{{dealer.employees.index(emp)}}">{{emp}}</a>
+                        <a class="employees-int dropdown-toggle nav-link link-light" data-toggle="collapse"  id="{{dealer.employees.index(emp)}}" href="#int-actions{{dealer.employees.index(emp)}}">{{emp}}</a>
                         <ul class="collapse list-unstyled" id="int-actions{{dealer.employees.index(emp)}}">
                             <li><a href="#" class="int-action nav-link dropdown-text">Called Dealership</a></li> 
                             <li><a href="#" class="int-action nav-link dropdown-text">Dealership Called</a></li>
@@ -21,10 +21,10 @@
                 </ul>
             </div>
         </nav>
-        <main class="col-9 px-md-4 ml-auto mr-5 notes-section">
+        <main class="col-10 px-md-4 ml-auto notes-section">
             <div class="d-flex text-center align-items-center">
-                <div class="mx-auto">
-                    <p id="employee-name-title">Hi!</p>
+                <div class="mx-auto my-5">
+                    <p id="employee-name-title">Please Select Employee</p>
                 </div>
             </div>
             <div class="row">
@@ -54,13 +54,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div>
-                    <h4 id="time-of-note"></h4>
-                    <div id="note-area">
-                        <p class="d-block note-formatting" id="note-display"></p>
-                    </div>
+            <div class="row mt-5">
+                <div class="col-12 my-2">
+                    <div class="mx-2">
+                        <div class="notes-area d-none p-3">
+                        <h4 id="time-of-note"></h4>
+                        <p class="d-block ml-2 mt-2" id="note-display"></p>
+                        </div>
                     </div>
                 </div>
             </div>

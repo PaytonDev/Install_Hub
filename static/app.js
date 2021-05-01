@@ -80,7 +80,7 @@ $('#add-note').on('click', function(e) {
     let $notesLinkCopy = $('#notes-header').text();
     let timestamp = moment().format("MMM Do, h:mm a");
 
-    let link = `<li class="note-link py-2 w-100"><a>${$notesLinkCopy} on ${timestamp}</a></li>`
+    let link = `<li class="note-link py-2 w-100" id="note-${noteArray.length}"><a>${$notesLinkCopy} on ${timestamp}</a></li>`
 
     let linkCopy = `${$notesLinkCopy} on ${timestamp}`
     
@@ -90,12 +90,14 @@ $('#add-note').on('click', function(e) {
         [link]:noteContent,
         timestamp:timestamp,
         }
-    if (noteContent === '') {   
-        alert('Please enter note!')
-    } else if ($notesLinkCopy === 'Notes'){
-        alert('Please select interation type!')
-    } else {
-        $('.interaction-list').append(link)
+
+        if (noteContent === '') {   
+            alert('Please enter note!')
+        } else if ($notesLinkCopy === 'Notes'){
+            alert('Please select interation type!')
+        } else {
+            console.log(noteObj[selectedEmp]['notes'])
+            $('.interaction-list').append(link)
         noteArray.push(linkAndNote)
     }
 })
@@ -107,19 +109,20 @@ $('.interaction-list').on('click', 'li', function(e) {
     let noteArray = noteObj[selectedEmp]['notes']
     let $noteDisplay = $('#note-display')
     let $noteTime = $('#time-of-note')
-    let linkCopy = getLinkCopy();
+    let linkCopy = getLinks();
 
 
         if ($noteDisplay.text() === "") {
-            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.innerText)][e.target.innerHTML])
-            $noteTime.text(noteArray[linkCopy.indexOf(e.target.innerText)]['timestamp'])
+            console.log(e)
+            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.parentElement.outerHTML)][e.target.parentElement.outerHTML])
+            $noteTime.text(noteArray[linkCopy.indexOf(e.target.parentElement.outerHTML)]['timestamp'])
+
         } else {
             $noteDisplay.text('')
-            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.innerText)][e.target.innerText])
-            $noteTime.text(noteArray[linkCopy.indexOf(e.target.innerText)]['timestamp'])
+            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.parentElement.outerHTML)][e.target.parentElement.outerHTML])
+            $noteTime.text(noteArray[linkCopy.indexOf(e.target.parentElement.outerHTML)]['timestamp'])
         }
-
-    $('.notes-area').removeClass("d-none");
+    $('.notes-area').removeClass('d-none')
 });
 
 // Covid Countdown Timer
@@ -141,45 +144,37 @@ setInterval(function time(){
 
 }, 1000)
 
-// Function to display all interaction links for each Employee
-
-    // How do I gather data that holds employee - note relationship?
-
-
-
-    // How do I display that information with a list of links?
-    function getLinkCopy() {
-        let notesArr = empNoteList[selectedEmp]['notes']
-        let linkCopy = []
-        for (let n of notesArr){
-            linkCopy.push(Object.keys(n)[0])
-        }
-         linkCopyList = linkCopy;
-         return linkCopyList;
+function getLinkCopy() {
+    let notesArr = empNoteList[selectedEmp]['notes']
+    let linkCopy = []
+    for (let n of notesArr){
+        linkCopy.push(Object.keys(n)[0])
     }
+        linkCopyList = linkCopy;
+        return linkCopyList;
+}
 
-    function getLinks() {
-        let notesArr = empNoteList[selectedEmp]['notes']
-        let links = []
-        for (let n of notesArr){
-            links.push(Object.keys(n)[1])
-        }
-         linkList = links;
-         return linkList;
+function getLinks() {
+    let notesArr = empNoteList[selectedEmp]['notes']
+    console.log(notesArr)
+    let linkCopy = []
+    for (let n of notesArr){
+        linkCopy.push(Object.keys(n)[1])
     }
-    // Do they change when the employee changes?
-    // Do the links persist?
+        linkList = linkCopy;
+        return linkList;
+}
 
-    function showLinks(){
-        $('.interaction-list').text('')
-        
-        let links = getLinks();
-        if (links.length != 0){
+function showLinks(){
+    $('.interaction-list').text('')
+    
+    let links = getLinks();
+    if (links.length != 0){
 
-            for (let link of links) {
-                $('.interaction-list').append(link)
-            }
+        for (let link of links) {
+            $('.interaction-list').append(link)
         }
-        return links
     }
+    return links
+}
 

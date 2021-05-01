@@ -9,28 +9,22 @@
     <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <header class="navbar navbar-expand-lg navbar-light mb-2">
-          <a class="navbar-brand" href="#"><img src="/static/Dealertrack_Core_Symbol_Blue_RGB.png"></a>
+    <header class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="/user/{{ user.userid }}/detail"><img src="/static/Dealertrack_Core_Symbol_Blue_RGB.png"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/user/{{ user.userid }}/detail">Install Detail</a>
+                <a class="nav-link navbar-link" aria-current="page" href="/user/{{ user.userid }}/detail">Install Detail</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/user/{{ user.userid }}/{{ user.current_dealership }}/interaction-log">Interaction Log</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Checklist</a>
+                <a class="nav-link  navbar-link" href="/user/{{ user.userid }}/{{ user.current_dealership }}/interaction-log">Interaction Log</a>
               </li>
             <div class="ml-auto"></div>
               <li class="nav-item ">
-                <a class="nav-link" href="#">Account</a>
-              </li>
-              <li class="nav-item ">
-                <a href="/logout" class="nav-link" href="#">Logout</a>
+                <a href="/logout" class="nav-link navbar-link" href="#">Logout</a>
               </li>
             </div>
             </ul>

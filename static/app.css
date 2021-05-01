@@ -1,8 +1,8 @@
 body {
     width: auto;
     height: 100%;
-    background-color: #f8f9fa;
-    padding: 0px, 50px;
+    background-color: #f7f7f9;
+    padding: 0, 50px;
 }
 
 html {
@@ -26,6 +26,14 @@ img {
     width: 100%;
 }
 
+header {
+    border-bottom:1px solid rgba(51, 51, 51, 0.2);
+}
+
+main {
+    height: 100vh;
+}
+
 
 /* Classes */
 .sidebar-wrapper {
@@ -40,7 +48,7 @@ img {
 .current-install-info {
     width: 90%;
     height: 30vh;
-    background-color: #fff;
+    background-color: #Fff;
     margin-top: 5%;
     margin-bottom: 5%;
 }
@@ -57,7 +65,7 @@ img {
     padding-bottom: 10px;
 }
 
-.onboarding-block{
+.onboarding-block {
     width: 80%;
     height: auto;
 }
@@ -73,17 +81,18 @@ img {
 .employee-header {
     font-size: 2rem;
     font-weight: bold;
+    color:#fff
 }
 
 .sidebar {
     position: fixed;
-    top: 85px;
+    top: 87px;
     bottom: 0;
     left: 0;
     z-index: 100;
-    padding: 20px 0 0;
-    box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);
-    background: #fff;
+    background: #0b132b;
+    min-width: 240px;
+    border: 1px solid rgba(51, 51, 51, 0.2);
 }
 
 .interaction-item {
@@ -102,7 +111,8 @@ img {
 }
 
 .note-link:nth-child(odd) {
-    background: rgb(197, 195, 195);
+    background: #0b132b;
+    color:#Fff
 }
 
 .note-link:hover {
@@ -114,8 +124,13 @@ img {
     background: #fff;
 }
 
+.notes-area {
+    border: 1px solid rgba(51, 51, 51, 0.2);
+    border-radius: 5px;
+}
+
 .dropdown-text {
-    color: #000;
+    color: #fff;
     font-size: medium;
 }
 /* IDs */
@@ -125,8 +140,8 @@ img {
 }
 
 #employee-name-title {
-    font-size: 28px;
-    font-weight: bolder;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 #last-title {
@@ -142,6 +157,7 @@ img {
 
 #contact {
     border: 1px solid rgba(51, 51, 51, 0.2);
+    border-radius: 5px;
     height: 60%;
     width: 80%;
     overflow-y: auto;
@@ -164,3 +180,4 @@ img {
     min-width: 32px;
     max-width: 200px;
 }
+
