@@ -36,6 +36,10 @@ def logout_user():
     """Logout user"""
     if USER_KEY in session:
         del session[USER_KEY]
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
     
 
 

@@ -80,7 +80,7 @@ $('#add-note').on('click', function(e) {
     let $notesLinkCopy = $('#notes-header').text();
     let timestamp = moment().format("MMM Do, h:mm a");
 
-    let link = `<li class="note-link py-2 w-100" id="note-${noteArray.length}"><a>${$notesLinkCopy} on ${timestamp}</a></li>`
+    let link = `<li class="note-link py-2 w-100 interaction-list" id="note-${noteArray.length}">${$notesLinkCopy} on ${timestamp}</li>`
 
     let linkCopy = `${$notesLinkCopy} on ${timestamp}`
     
@@ -96,14 +96,13 @@ $('#add-note').on('click', function(e) {
         } else if ($notesLinkCopy === 'Notes'){
             alert('Please select interation type!')
         } else {
-            console.log(noteObj[selectedEmp]['notes'])
-            $('.interaction-list').append(link)
+            $('.int').append(link)
         noteArray.push(linkAndNote)
     }
 })
 
 // displaying the interaction from correlating link
-$('.interaction-list').on('click', 'li', function(e) {
+$('.int').on('click', 'li', function(e) {
     e.preventDefault()
     let noteObj = createNotesObject();
     let noteArray = noteObj[selectedEmp]['notes']
@@ -111,19 +110,20 @@ $('.interaction-list').on('click', 'li', function(e) {
     let $noteTime = $('#time-of-note')
     let linkCopy = getLinks();
 
-
-        if ($noteDisplay.text() === "") {
-            console.log(e)
-            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.parentElement.outerHTML)][e.target.parentElement.outerHTML])
-            $noteTime.text(noteArray[linkCopy.indexOf(e.target.parentElement.outerHTML)]['timestamp'])
-
-        } else {
-            $noteDisplay.text('')
-            $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.parentElement.outerHTML)][e.target.parentElement.outerHTML])
-            $noteTime.text(noteArray[linkCopy.indexOf(e.target.parentElement.outerHTML)]['timestamp'])
-        }
+    $noteDisplay.text(noteArray[linkCopy.indexOf(e.target.outerHTML)][e.target.outerHTML])
+    $noteTime.text(noteArray[linkCopy.indexOf(e.target.outerHTML)]['timestamp'])
     $('.notes-area').removeClass('d-none')
 });
+
+$('#no-covid').on('click', function(e) {
+    e.preventDefault()
+    $('.modal-footer').modal('hide')
+
+    $('#covid-msg-clock').hide()
+    $('#covid-msg-checked-in').removeClass('d-none')
+})
+
+document.getElementById('backBtn').addEventListener('click', backOnePage)
 
 // Covid Countdown Timer
 setInterval(function time(){
@@ -156,7 +156,6 @@ function getLinkCopy() {
 
 function getLinks() {
     let notesArr = empNoteList[selectedEmp]['notes']
-    console.log(notesArr)
     let linkCopy = []
     for (let n of notesArr){
         linkCopy.push(Object.keys(n)[1])
@@ -178,3 +177,6 @@ function showLinks(){
     return links
 }
 
+function backOnePage() {
+    window.location.href='javascript:history.go(-1)'
+}

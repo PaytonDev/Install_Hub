@@ -38,7 +38,8 @@
         <div class="d-flex col-6 detail-title text-center align-items-center">
             <div class="mx-auto">
                 <p class="install-header">Covid Check-In</p>
-                <p class="install-text">You have<br><span id="covid-countdown" class="install-text"></span><br>to check in.</p>
+                <p class="install-text" id="covid-msg-clock">You have<br><span id="covid-countdown" class="install-text"></span><br>to check in.</p>
+                <p class="d-none install-text" id="covid-msg-checked-in">Thanks for checking in.<br>Don't forget your mask!</p>
             </div>
         </div>
         <div class="d-flex col-6 text-center align-items-center">
@@ -77,8 +78,8 @@
                 </ul>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">No, I have not</button>
-              <button id="covid-positive" type="button" class="btn btn-danger">Yes, I have</button>
+              <button id="no-covid" type="button" class="btn btn-success" data-dismiss="modal">No, I have not</button>
+              <button id="yes-covid" type="button" class="btn btn-danger">Yes, I have</button>
             </div>
           </div>
         </div>
