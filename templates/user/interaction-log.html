@@ -1,0 +1,70 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-2 d-md-block collapse sidebar pt-3 h-100" id="sidebarMenu">
+            <div class="position-sticky side-div">
+                <ul class="nav flex-column">
+                    <li class=" nav-item employee-header my-2 ">Employees:</li>
+                    {% for emp in dealer.employees %}
+                    <li class="nav-item my-2 emp-list-item install-text">
+                        <a class="employees-int dropdown-toggle nav-link link-light" data-toggle="collapse"  id="{{dealer.employees.index(emp)}}" href="#int-actions{{dealer.employees.index(emp)}}">{{emp}}</a>
+                        <ul class="collapse list-unstyled" id="int-actions{{dealer.employees.index(emp)}}">
+                            <li><a href="#" class="int-action nav-link dropdown-text">Called Dealership</a></li> 
+                            <li><a href="#" class="int-action nav-link dropdown-text">Dealership Called</a></li>
+                            <li><a href="#" class="int-action nav-link dropdown-text">Sent Email</a></li>
+                            <li><a href="#" class="int-action nav-link dropdown-text">Recieved Email</a></li>
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </nav>
+        <main class="col-10 px-md-4 ml-auto notes-section">
+            <div class="d-flex text-center align-items-center">
+                <div class="mx-auto my-5">
+                    <p id="employee-name-title">Please Select Employee</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="py-2">
+                        <div class="text-center px-3">
+                            <p id="notes-header" class="install-text">Notes</p>
+                            <div class="d-flex align-items-center form-group">
+                                <textarea class="mx-auto form-control" aria-label="With textarea" id='note-content' rows="8"></textarea>
+                            </div>
+                            <button class="btn btn-primary my-2 px-4" id="add-note">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 log-section">
+                    <div class="text-center">
+                        <div class="mx-auto mt-2">
+                            <p id="log-header" class="install-text text-center">Log</p>
+                        </div>
+                    </div>
+                    <div class="text-center mx-auto" id="contact">
+                        <div>
+                            <ul class="int p-0">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 my-2">
+                    <div class="mx-2">
+                        <div class="notes-area d-none p-3">
+                        <h4 id="time-of-note"></h4>
+                        <p class="d-block ml-2 mt-2" id="note-display"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

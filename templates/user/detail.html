@@ -1,21 +1,22 @@
 {% extends 'user/base.html' %}
 
 {% block content %}
+    {% for category, msg in get_flashed_messages(with_categories=true) %}
+    <div class= 'alert alert-{{category}} mx-auto text-center'>{{ msg }}</div>
+    {% endfor %}
 
     <div class="container">
     <div class="d-flex row mx-auto text-center justify-content-center current-install-info">
-        <div class="col-6 install-name">
-            <div class="install-headers mb-3">
-                <h1  class="mb-1 install-header">Current Install:</h1>
+        <div class="d-flex col-6 install-name align-items-center text-center">
+            <div class="install-headers mb-3 mx-auto">
+                <p class="mb-1 install-header">Current Install:</p>
                 <h3 id="install-dealership">Tom Wood Ford</h3>
-            </div>
-            <div class="header-buttons">
-                <a href="/user/{{ user.userid }}/{{ user.current_dealership }}/interaction-log" class="btn btn-light btn-lg m-1">Interaction Log</a>
+                <a href="/user/{{ user.userid }}/{{ user.current_dealership }}/interaction-log" class="btn btn-dark btn-lg m-1">Interaction Log</a>
             </div>
         </div>
         <div class="d-flex col-2 install-ids align-items-center text-center">
             <div class="install-id-title mb-3 mx-auto">
-                <p class="mb-1 install-text">Enterprise #</p>
+                <p class="mb-1 install-text">Ent #</p>
                 <p class="install-data install-text">{{ dealer.ent_code }}</p>
             </div>
         </div>
@@ -25,7 +26,7 @@
                 <p class="install-data install-text">{{ dealer.store_num }}</p>
             </div>
         </div>
-        <div class="d-flex col-2 install-ids align-items-center text-center">
+        <div class="d-flex col-2 align-items-center text-center">
             <div class="install-id-title mb-3 mx-auto" id="last-title">
                 <p class="mb-1 install-text">DTID</p>
                 <p class="install-data install-text">{{ dealer.dtid }}</p>
@@ -34,12 +35,11 @@
     </div>
 
     <div class="d-flex mx-auto row justify-content-center current-install-info">
-        <div class=" d-flex col-6 flex-column text-center detail-title">
-            <div class="my-2">
-                <h1>Covid Check-In</h1>
-                <h4>You have:</h4>
-                <h3 id="covid-countdown"></h3>
-                <h4>to check in.</h4>
+        <div class="d-flex col-6 detail-title text-center align-items-center">
+            <div class="mx-auto">
+                <p class="install-header">Covid Check-In</p>
+                <p class="install-text" id="covid-msg-clock">You have<br><span id="covid-countdown" class="install-text"></span><br>to check in.</p>
+                <p class="d-none install-text" id="covid-msg-checked-in">Thanks for checking in.<br>Don't forget your mask!</p>
             </div>
         </div>
         <div class="d-flex col-6 text-center align-items-center">
@@ -51,13 +51,6 @@
         </div>
     </div>
 
-    <div class="d-flex row mx-auto current-install-info justify-content-center ">
-        <div class="d-flex col-6 detail-title text-center align-items-center">
-            <h1 class="mx-auto">Upcoming Installs</h1>
-        </div>
-        <div class="d-flex col-6">
-        </div>
-    </div>
 
     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -77,7 +70,7 @@
                     <li>Fatigue</li>
                     <li>Muscle or body aches</li>
                     <li>Headache</li>
-                    <li>New loss Of taste or smell</li>
+                    <li>New loss of taste or smell</li>
                     <li>Sore throat</li>
                     <li>Congestion or runny nose</li>
                     <li>Nausea or vomiting</li>
@@ -85,18 +78,33 @@
                 </ul>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I have not</button>
-              <button id="covid-positive" type="button" class="btn btn-primary">Yes, I have</button>
+              <button id="no-covid" type="button" class="btn btn-success" data-dismiss="modal">No, I have not</button>
+              <button id="yes-covid" type="button" class="btn btn-danger">Yes, I have</button>
             </div>
           </div>
         </div>
       </div>
 
-    <div class="d-flex row mx-auto current-install-info justify-content-center">
+    <div class="d-flex row mb-2 mx-auto current-install-info justify-content-center">
         <div class="d-flex col-6 detail-title text-center align-items-center">
-            <h1 class="mx-auto">Travel Info</h1>
+            <p class="mx-auto install-header">Travel Info</p>
         </div>
-        <div class="d-flex col-6">
+        <div class="d-flex col-3 detail-title text-center align-items-center" id="time-to-dealership">
+            <div class="mx-auto">
+                <p class="mx-auto">Travel time To Airport:</p>
+                <p class="mx-auto" id="airport-time">{{ timeToAirport }}</p>
+                <!-- <p class="mx-auto" id="dealer-address">{{ dealer.d_address }}</p> -->
+                <p class='mx-auto' id="airport">Richmond International Airport</p>
+            </div>
+        </div>
+        <div class="d-flex col-3 text-center align-items-center" id="weather-by-dealership">
+            <div class="mx-auto">
+                <p class="mx-auto my-0">Current Weather In:</p>
+                <p class="mx-auto" id="weather-city">{{ dealer.d_city }}</p>
+                <p id="weather-condition" class="my-0">{{ weatherObj.condition }}</p>
+                <p id="weather-temp" class="my-0">{{ weatherObj.temp }}</p>
+                <img id="weather-icon" src="{{ weatherObj.icon }}" height="50px" class="my-0">
+            </div>
         </div>
     </div>
     </div>

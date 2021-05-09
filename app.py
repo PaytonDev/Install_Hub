@@ -3,7 +3,10 @@ from forms import LoginForm, RegisterForm
 from models import db, connect_db, Dealership, Project, Employee, Task, Department, User
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
-# from flask_cors import CORS
+import requests
+import json
+from api import getWeather, requestTimeToAirport
+from flask_cors import CORS
 
 USER_KEY = 'curr_user'
 app = Flask(__name__)
@@ -33,6 +36,10 @@ def logout_user():
     """Logout user"""
     if USER_KEY in session:
         del session[USER_KEY]
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
     
 
 
@@ -41,7 +48,7 @@ def show_homepage():
     return render_template("homepage.html")
 
 
-@app.route("/login", methods=["GET", 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """handle login validation"""
     form = LoginForm()
@@ -51,9 +58,8 @@ def login():
 
         if user:
             login_user(user)
-            flash(f'Welcome, {user.i_firstname}!', "success")
             return redirect(f'/user/{user.userid}/detail')
-        
+
         flash("Invalid login.", "danger")
 
     return render_template('login.html', form=form)
@@ -84,6 +90,7 @@ def register():
             return render_template('register.html', form=form)
 
         login_user(user)
+        flash(f'Welcome, {user.i_firstname}!', "success")
         return redirect(f"/user/{user.userid}/detail")
 
     else:
@@ -93,21 +100,34 @@ def register():
 @app.route('/user/<int:userid>/detail', methods=['GET', 'POST'])
 def show_install_detail(userid):
     """Loading data about the install to show on the page"""
+    if g.user:
+        user = User.query.get_or_404(userid)
+        dealer = Dealership.query.get_or_404(user.current_dealership)
+        
 
-    user = User.query.get_or_404(userid)
-    dealer = Dealership.query.get_or_404(user.current_dealership)
+        weatherObj = getWeather();
+        timeToAirport = requestTimeToAirport();
 
-    return render_template('user/detail.html', user=user, dealer=dealer)
+        return render_template('user/detail.html', user=user, dealer=dealer, weatherObj = weatherObj, timeToAirport = timeToAirport)
+
+    else:
+        flash("Unauthorized. Please Login.", "danger")
+        return redirect(f"/login")
 
 
 @app.route('/user/<int:userid>/<int:current_dealership>/interaction-log', methods=['GET', 'POST'])
 def show_dealership_inter_log(userid, current_dealership):
+    if g.user:
+        user = User.query.get_or_404(userid)
+        current_dealership = Dealership.query.get_or_404(user.current_dealership)
 
-    user = User.query.get_or_404(userid)
-    current_dealership = Dealership.query.get_or_404(user.current_dealership)
+        return render_template('user/interaction-log.html', user=user, dealer=current_dealership)
 
-    return render_template('user/interraction-log.html', user=user, dealer=current_dealership)
+    else:
+        flash("Unauthorized. Please Login.", "danger")
+        return redirect(f"/login")
 
+        
 @app.route('/logout')
 def log_out_user():
     logout_user()

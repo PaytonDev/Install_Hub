@@ -1,7 +1,8 @@
 body {
     width: auto;
-    height: auto;
-    background-color: #f8f9fa;
+    height: 100vh;
+    background-color: #f7f7f9;
+    padding: 0, 50px;
 }
 
 html {
@@ -25,17 +26,22 @@ img {
     width: 100%;
 }
 
+header {
+    border-bottom:1px solid rgba(51, 51, 51, 0.2);
+    z-index: 100;
+}
+
+main {
+    height: 100vh;
+}
+
 
 /* Classes */
 .sidebar-wrapper {
     width: 200px;
 }
 
-.onboarding {
-    margin: 0 auto;
-}
-
-.navbar-brand > img{
+.navbar-brand > img {
     width: 60px;
     height: 60px;
 }
@@ -43,7 +49,7 @@ img {
 .current-install-info {
     width: 90%;
     height: 30vh;
-    background-color: #fff;
+    background-color: #Fff;
     margin-top: 5%;
     margin-bottom: 5%;
 }
@@ -60,7 +66,7 @@ img {
     padding-bottom: 10px;
 }
 
-.onboarding-block{
+.onboarding-block {
     width: 80%;
     height: auto;
 }
@@ -73,23 +79,78 @@ img {
     width: 100%;
 }
 
+.side-div {
+    margin-top: 30%;
+}
+
+.employee-header {
+    font-size: 2rem;
+    font-weight: bold;
+    color:#fff
+}
+
+.sidebar {
+    position: fixed;
+    top:0px;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    background: #0b132b;
+    min-width: 240px;
+    border: 1px solid rgba(51, 51, 51, 0.2);
+    height: 100vh;
+}
+
 .interaction-item {
     border-bottom: 1px solid rgba(51, 51, 51, 0.2);
     list-style-type: none;
 }
 
-.dropdown-menu {
-    max-height: 100px;
-    max-width: 100%;
-    overflow-y: auto;
-}
 
 .interaction-list {
     list-style-type: none;
 }
 
-/* IDs */
+.install-header {
+    font-size: 2rem;
+    font-weight: bold;
+}
 
+.note-link:nth-child(odd) {
+    background: #0b132b;
+    color:#Fff
+}
+
+.note-link:hover {
+    background: rgb(114, 114, 114);
+    color: #fff;
+}
+
+.notes-section, .log-section {
+    background: #fff;
+}
+
+.notes-area {
+    border: 1px solid rgba(51, 51, 51, 0.2);
+    border-radius: 5px;
+    min-height: 100%;
+    overflow-wrap: break-word;
+}
+
+.dropdown-text {
+    color: #fff;
+    font-size: medium;
+}
+/* IDs */
+#weather-icon {
+    max-height: 50px;
+    max-width: 50px;
+}
+
+#employee-name-title {
+    font-size: 32px;
+    font-weight: bold;
+}
 
 #last-title {
     border: none;
@@ -104,24 +165,40 @@ img {
 
 #contact {
     border: 1px solid rgba(51, 51, 51, 0.2);
+    border-radius: 5px;
+    height: 60%;
     width: 80%;
-    margin: auto;
     overflow-y: auto;
-}
-
-
-#covid-countdown {
-    font-size: 2rem;
+    background: #fff;
 }
 
 #homepage {
     overflow: none;
 }
 
-/* .info-display {
-    height: 30%;
+#login-form {
+    width: 40%;
 }
 
-.employee-dropdown {
-    height: 10%;
-} */
+#note-content {
+    min-width: 90%;
+}
+
+#add-note {
+    min-width: 32px;
+    max-width: 200px;
+}
+
+#content-404 {
+    margin-top: 1.5rem;
+    margin-bottom: .5rem;
+}
+
+#msg-404 {
+    font-family:'Oswald', sans-serif;
+    font-size: 10rem
+}
+
+#page-404 {
+    overflow:hidden;
+}

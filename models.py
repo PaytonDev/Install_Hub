@@ -17,6 +17,7 @@ class Dealership(db.Model):
     ent_code = db.Column(db.Text, nullable=False)
     d_name = db.Column(db.Text, nullable=False)
     d_address = db.Column(db.Text, nullable=False)
+    d_city = db.Column(db.Text, nullable=False)
     d_phone = db.Column(db.Text, nullable=False)
     services = db.Column(db.ARRAY(db.Text), nullable=False)
     departments = db.Column(db.ARRAY(db.Text), nullable=False)
