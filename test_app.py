@@ -15,11 +15,6 @@ def random_string():
 
 class RouteTest(TestCase):
     """Testing Routes"""
-    def new_user(self):
-        client = app.test_client()
-        res = client.post("/login", data = {"username" : "testuser", "password" : "testuser"})
-        html = res.get_data(as_text = True)
-        print(html)
 
     def test_login_page(self):
         client = app.test_client()
