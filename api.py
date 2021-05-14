@@ -32,11 +32,11 @@ def requestTimeToAirport():
     airportURL = 'https://maps.googleapis.com/maps/api/directions/json?'
     dealershipAddress = '9520 W Broad St, Richmond, VA'
     airport = 'Richmond International Airport'
-    token = 'AIzaSyDUSUw7RHppkAHxnQlAj75cuLmzL3S7Arg'
+
     PARAMS = {
         'origin' : dealershipAddress,
         'destination' : airport,
-        'key' : token
+        'key' : 'API_KEY'
     }
 
     req = requests.get(url= airportURL, params= PARAMS)
