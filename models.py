@@ -71,7 +71,7 @@ class User(db.Model):
     def signup(cls, username, i_password, current_dealership, i_firstname,
     i_lastname, i_department, i_title, phone, email):
 
-        hashed_pwd = bcrypt.generate_password_hash(i_password).decode('UTF-8')
+        hashed_pwd = bcrypt.generate_password_hash(i_password).decode('utf-8')
 
         user = User(
             username = username,
