@@ -49,7 +49,7 @@ main {
 .current-install-info {
     width: 90%;
     height: 30vh;
-    background-color: #Fff;
+    background-color: #ffffff;
     margin-top: 5%;
     margin-bottom: 5%;
 }
@@ -72,7 +72,7 @@ main {
 }
 
 .navbar {
-    background-color: #fff
+    background-color: #ffffff
 }
 
 .navbar-nav {
@@ -86,7 +86,7 @@ main {
 .employee-header {
     font-size: 2rem;
     font-weight: bold;
-    color:#fff
+    color:#ffffff
 }
 
 .sidebar {
@@ -118,16 +118,16 @@ main {
 
 .note-link:nth-child(odd) {
     background: #0b132b;
-    color:#Fff
+    color:#ffffff
 }
 
 .note-link:hover {
     background: rgb(114, 114, 114);
-    color: #fff;
+    color: #ffffff;
 }
 
 .notes-section, .log-section {
-    background: #fff;
+    background: #ffffff;
 }
 
 .notes-area {
@@ -138,7 +138,7 @@ main {
 }
 
 .dropdown-text {
-    color: #fff;
+    color: #ffffff;
     font-size: medium;
 }
 /* IDs */
@@ -159,7 +159,7 @@ main {
 #homepage-info, #login-info{
     width: 90%;
     height: 90%;
-    background-color: #fff;
+    background-color: #ffffff;
     /* margin-top: 5%; */
 }
 
@@ -169,7 +169,7 @@ main {
     height: 60%;
     width: 80%;
     overflow-y: auto;
-    background: #fff;
+    background: #ffffff;
 }
 
 #homepage {
