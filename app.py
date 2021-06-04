@@ -5,6 +5,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 import requests
 import json
+import os
 from api import getWeather, requestTimeToAirport
 from flask_cors import CORS
 
@@ -14,7 +15,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///install'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config["SECRET_KEY"] = "super-extra-secretive"
+app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY', 'thisiswild')
 
 connect_db(app)
 
