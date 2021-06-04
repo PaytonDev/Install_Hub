@@ -27,20 +27,20 @@ def getWeather():
     return weatherObj
 
 
-def requestTimeToAirport():
-    """ Google Directions API request for 'Time to Airport' Data """
-    airportURL = 'https://maps.googleapis.com/maps/api/directions/json?'
-    dealershipAddress = '9520 W Broad St, Richmond, VA'
-    airport = 'Richmond International Airport'
+# def requestTimeToAirport():
+#     """ Google Directions API request for 'Time to Airport' Data """
+#     airportURL = 'https://maps.googleapis.com/maps/api/directions/json?'
+#     dealershipAddress = '9520 W Broad St, Richmond, VA'
+#     airport = 'Richmond International Airport'
 
-    PARAMS = {
-        'origin' : dealershipAddress,
-        'destination' : airport,
-        'key' : 'API_KEY'
-    }
+#     PARAMS = {
+#         'origin' : dealershipAddress,
+#         'destination' : airport,
+#         'key' : 'API_KEY'
+#     }
 
-    req = requests.get(url= airportURL, params= PARAMS)
+#     req = requests.get(url= airportURL, params= PARAMS)
 
-    res = req.json()
-    timeToAirport = res['routes'][0]['legs'][0]['duration']['text']
-    return timeToAirport
+#     res = req.json()
+#     timeToAirport = res['routes'][0]['legs'][0]['duration']['text']
+#     return timeToAirport

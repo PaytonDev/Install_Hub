@@ -6,13 +6,13 @@ from sqlalchemy.exc import IntegrityError
 import requests
 import json
 import os
-from api import getWeather, requestTimeToAirport
+from api import getWeather
 from flask_cors import CORS
 
 USER_KEY = 'curr_user'
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///install'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///install')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY', 'thisiswild')
@@ -107,9 +107,9 @@ def show_install_detail(userid):
         
 
         weatherObj = getWeather();
-        timeToAirport = requestTimeToAirport();
+        # timeToAirport = requestTimeToAirport();
 
-        return render_template('user/detail.html', user=user, dealer=dealer, weatherObj = weatherObj, timeToAirport = timeToAirport)
+        return render_template('user/detail.html', user=user, dealer=dealer, weatherObj = weatherObj)
 
     else:
         flash("Unauthorized. Please Login.", "danger")
