@@ -5,7 +5,6 @@ import codecs
 
 codecs.register_error("strict", codecs.ignore_errors)
 
-bcrypt = bcrypt()
 db = SQLAlchemy()
 
 def connect_db(app):
