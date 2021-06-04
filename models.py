@@ -1,8 +1,10 @@
 import datetime
 from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
+import bcrypt
 
-bcrypt = Bcrypt()
+
+
+bcrypt = bcrypt()
 db = SQLAlchemy()
 
 def connect_db(app):
@@ -71,7 +73,8 @@ class User(db.Model):
     def signup(cls, username, i_password, current_dealership, i_firstname,
     i_lastname, i_department, i_title, phone, email):
 
-        hashed_pwd = bcrypt.generate_password_hash(i_password).decode('utf-8')
+        encoded_pass = i_password.encode('utf-8')
+        hashed_pwd = bcrypt.hashpw(encoded_pass, bcrypt.gensalt())
 
         user = User(
             username = username,
@@ -91,8 +94,10 @@ class User(db.Model):
     def authenticate(cls, username, i_password):
         user = cls.query.filter_by(username=username).first()
 
+        encodedpw = i_password.encode("utf-8")
+
         if user:
-            is_auth = bcrypt.check_password_hash(user.i_password, i_password)
+            is_auth = bcrypt.checkpw(encodedpw, user.i_password)
             if is_auth:
                 return user
 
