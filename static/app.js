@@ -123,7 +123,6 @@ $('#no-covid').on('click', function(e) {
     $('#covid-msg-checked-in').removeClass('d-none')
 })
 
-document.getElementById('backBtn').addEventListener('click', backOnePage)
 
 // Covid Countdown Timer
 setInterval(function time(){
