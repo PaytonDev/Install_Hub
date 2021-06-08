@@ -1,17 +1,18 @@
 ﻿# Field Implementation Hub  
  
- A basic dashboard for field implementation specialist to see frequestly used information and record communication with clients.
+ A dashboard for field implementation specialist to see frequestly used information and record communication with clients.
  
  ## Features
  
- - Basic homepage dashboard with common technical information for ticket submission
+ - Homepage dashboard with common technical information for ticket submission
  - Interaction log for clients
- - Useful site information for travel (weather, distance from airport)
+ - Useful site information for travel such as weather and distance from airport (both done through API integration
+ - Prepopulated site employees information due to database connection buit with SQL and SQLAlchemy
 
 ## Roadmap
 
 In future versions looking to update this tool with:
 
 - Email integration
-- Ticket Submission to superior
-- "Team Builder" feature that allows Management to edit team members within the application
+- Ticket Submission to superior staff
+- "Team Builder" feature that allows management to edit team members within the application

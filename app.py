@@ -12,7 +12,7 @@ from flask_cors import CORS
 USER_KEY = 'curr_user'
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://gaiswhdp:B_EhPunPMypP2JlJ-K4lJj7qNsePeK0f@batyr.db.elephantsql.com/gaiswhdp'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'POSTGRES_URI'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY', 'thisiswild')
