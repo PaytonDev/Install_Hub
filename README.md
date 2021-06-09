@@ -1,6 +1,6 @@
 ﻿# Field Implementation Hub  
  
- A dashboard for field implementation specialist to see frequestly used information and record communication with clients.
+ A dashboard for field implementation specialist specializing in car dealerships to see frequestly used information and record communication with clients.
  
  ## Features
  
